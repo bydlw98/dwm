@@ -1,8 +1,8 @@
 [Desktop Entry]
 Name=dwm
 Comment=dwm is a dynamic window manager for X
-Exec=dwm
-TryExec=dwm
+Exec=dwm_session.sh
+TryExec=dwm_session.sh
 Type=Application
 X-LightDM-DesktopName=dwm
 DesktopNames=dwm
