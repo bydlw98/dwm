@@ -2,6 +2,9 @@
 
 My build of [dwm](https://dwm.suckless.org/) an extremely fast, small, and dynamic window manager for X.
 
+## Patches
+* [fullgaps](https://dwm.suckless.org/patches/fullgaps/)
+
 
 ## Requirements
 
