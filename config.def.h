@@ -64,10 +64,12 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "st", NULL };
 static const char *browsercmd[] = {"firefox", NULL};
 static const char *lockscreencmd[] = {"betterlockscreen", "-l", NULL};
-static const char *volupcmd[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+1%", NULL };
-static const char *voldowncmd[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-1%", NULL };
-static const char *volmutecmd[] = { "pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle", NULL };
-static const char *micmutecmd[] = { "pactl", "set-sink-mute", "@DEFAULT_SOURCE@", "toggle", NULL };
+
+#define SHCMD_STR(cmd) (const char*[]){ "/bin/sh", "-c", cmd, NULL }
+static const char *volupcmd[] = SHCMD_STR("pactl set-sink-volume @DEFAULT_SINK@ +1%; kill -44 $(pidof dwmblocks)");
+static const char *voldowncmd[] = SHCMD_STR("pactl set-sink-volume @DEFAULT_SINK@ -1%; kill -44 $(pidof dwmblocks)");
+static const char *volmutecmd[] = SHCMD_STR("pactl set-sink-mute @DEFAULT_SINK@ toggle; kill -44 $(pidof dwmblocks)");
+static const char *micmutecmd[] = SHCMD_STR("pactl set-sink-mute @DEFAULT_SOURCE@ toggle; kill -44 $(pidof dwmblocks)");
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
