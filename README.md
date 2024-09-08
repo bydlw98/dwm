@@ -4,6 +4,7 @@ My build of [dwm](https://dwm.suckless.org/) an extremely fast, small, and dynam
 
 ## Patches
 * [fullgaps](https://dwm.suckless.org/patches/fullgaps/)
+* [movestack](https://dwm.suckless.org/patches/movestack/)
 
 
 ## Requirements
