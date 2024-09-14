@@ -65,12 +65,6 @@ static const char *termcmd[]  = { "st", NULL };
 static const char *browsercmd[] = {"firefox", NULL};
 static const char *lockscreencmd[] = {"betterlockscreen", "-l", NULL};
 
-#define SHCMD_STR(cmd) (const char*[]){ "/bin/sh", "-c", cmd, NULL }
-static const char *volupcmd[] = SHCMD_STR("pactl set-sink-volume @DEFAULT_SINK@ +1%; kill -44 $(pidof dwmblocks)");
-static const char *voldowncmd[] = SHCMD_STR("pactl set-sink-volume @DEFAULT_SINK@ -1%; kill -44 $(pidof dwmblocks)");
-static const char *volmutecmd[] = SHCMD_STR("pactl set-sink-mute @DEFAULT_SINK@ toggle; kill -44 $(pidof dwmblocks)");
-static const char *micmutecmd[] = SHCMD_STR("pactl set-sink-mute @DEFAULT_SOURCE@ toggle; kill -44 $(pidof dwmblocks)");
-
 #include "movestack.c"
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -78,10 +72,10 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_b,      spawn,          {.v = browsercmd } },
 	{ MODKEY|ShiftMask,             XK_x,      spawn,          {.v = lockscreencmd } },
-    { 0,              XF86XK_AudioRaiseVolume, spawn,          {.v = volupcmd } },
-    { 0,              XF86XK_AudioLowerVolume, spawn,          {.v = voldowncmd } },
-    { 0,                     XF86XK_AudioMute, spawn,          {.v = volmutecmd } },
-    { 0,                  XF86XK_AudioMicMute, spawn,          {.v = micmutecmd } },
+    { 0,              XF86XK_AudioRaiseVolume, spawn,          SHCMD("pactl set-sink-volume @DEFAULT_SINK@ +1%; kill -44 $(pidof dwmblocks)") },
+    { 0,              XF86XK_AudioLowerVolume, spawn,          SHCMD("pactl set-sink-volume @DEFAULT_SINK@ -1%; kill -44 $(pidof dwmblocks)") },
+    { 0,                     XF86XK_AudioMute, spawn,          SHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle; kill -44 $(pidof dwmblocks)") },
+    { 0,                  XF86XK_AudioMicMute, spawn,          SHCMD("pactl set-sink-mute @DEFAULT_SOURCE@ toggle; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
