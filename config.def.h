@@ -80,6 +80,8 @@ static const Key keys[] = {
     { 0,                  XF86XK_AudioMicMute, spawn,          SHCMD("pactl set-sink-mute @DEFAULT_SOURCE@ toggle; kill -44 $(pidof dwmblocks)") },
     { 0,               XF86XK_MonBrightnessUp, spawn,          { .v = brightnessupcmd } },
     { 0,             XF86XK_MonBrightnessDown, spawn,          { .v = brightnessdowncmd } },
+    { 0,                            XK_Print,  spawn,          SHCMD("flameshot full --clipboard") },
+    { MODKEY,                       XK_Print,  spawn,          SHCMD("flameshot full --path ~/Pictures/screenshots") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
