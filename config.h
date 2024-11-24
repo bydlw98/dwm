@@ -64,8 +64,6 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "st", NULL };
 static const char *browsercmd[] = { "firefox", NULL };
 static const char *lockscreencmd[] = { "betterlockscreen", "-l", NULL };
-static const char *brightnessupcmd[] = { "xbacklight", "-inc", "10", NULL };
-static const char *brightnessdowncmd[] = { "xbacklight", "-dec", "10", NULL };
 
 #include "movestack.c"
 static const Key keys[] = {
@@ -78,8 +76,8 @@ static const Key keys[] = {
     { 0,              XF86XK_AudioLowerVolume, spawn,          SHCMD("pactl set-sink-volume @DEFAULT_SINK@ -1%; kill -44 $(pidof dwmblocks)") },
     { 0,                     XF86XK_AudioMute, spawn,          SHCMD("pactl set-sink-mute @DEFAULT_SINK@ toggle; kill -44 $(pidof dwmblocks)") },
     { 0,                  XF86XK_AudioMicMute, spawn,          SHCMD("pactl set-sink-mute @DEFAULT_SOURCE@ toggle; kill -44 $(pidof dwmblocks)") },
-    { 0,               XF86XK_MonBrightnessUp, spawn,          { .v = brightnessupcmd } },
-    { 0,             XF86XK_MonBrightnessDown, spawn,          { .v = brightnessdowncmd } },
+    { 0,               XF86XK_MonBrightnessUp, spawn,          SHCMD("xbacklight -inc 10") },
+    { 0,             XF86XK_MonBrightnessDown, spawn,          SHCMD("xbacklight -dec 10") },
     { 0,                            XK_Print,  spawn,          SHCMD("flameshot full --clipboard") },
     { MODKEY,                       XK_Print,  spawn,          SHCMD("flameshot full --path ~/Pictures/screenshots") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
