@@ -1,0 +1,44 @@
+#!/bin/sh
+
+# Script to increment, decrement, or mute volume and send a notification.
+
+case $1 in
+up)
+    wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 1%+
+    ;;
+down)
+    wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 1%-
+    ;;
+mute)
+    wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+    ;;
+esac
+
+vol="$(wpctl get-volume @DEFAULT_AUDIO_SINK@)"
+
+[ "$vol" != "${vol%\[MUTED\]}" ] &&
+    dunstify -u low "Volume: [MUTED]" -t 2000 -r 9910 \
+        -i "/usr/share/icons/Papirus/16x16/panel/volume-level-muted.svg" && exit
+
+vol="${vol#Volume: }"
+
+split() {
+    # For ommiting the . without calling and external program.
+    IFS=$2
+    set -- $1
+    printf '%s' "$@"
+}
+
+vol=$(printf "%.0f" "$(split "$vol" ".")")
+
+send_notification() {
+    dunstify -u low -h int:value:"$vol" "Volume: ${vol}%" -t 2000 -r 9910 -i "$1"
+}
+
+if [ "$vol" -lt 33 ]; then
+    send_notification "/usr/share/icons/Papirus/16x16/panel/volume-level-low.svg"
+elif [ "$vol" -lt 66 ]; then
+    send_notification "/usr/share/icons/Papirus/16x16/panel/volume-level-medium.svg"
+else
+    send_notification "/usr/share/icons/Papirus/16x16/panel/volume-level-high.svg"
+fi
