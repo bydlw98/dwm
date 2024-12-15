@@ -1,5 +1,5 @@
 #!/bin/sh
 
-[ -f ~/.xinitrc ] && . ~/.xinitrc
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/dwm/xprofile" ] && . "${XDG_CONFIG_HOME:-$HOME/.config}/dwm/xprofile"
 
 exec dwm
