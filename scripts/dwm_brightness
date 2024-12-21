@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# Script to increment, or decrement brightness and send a notification.
+
+case $1 in
+up)
+    xbacklight -inc 10
+    ;;
+down)
+    xbacklight -dec 10
+    ;;
+esac
+
+brightness="$(xbacklight -get)"
+
+send_notification() {
+    dunstify -u low -h int:value:"$brightness" "Brightness: ${brightness}%" -t 2000 -r 9920 -i "$1"
+}
+
+if [ "$brightness" -lt 33 ]; then
+    send_notification "/usr/share/icons/Papirus/16x16/panel/brightness-low-symbolic.svg"
+elif [ "$brightness" -lt 66 ]; then
+    send_notification "/usr/share/icons/Papirus/16x16/panel/brightness-medium-symbolic.svg"
+else
+    send_notification "/usr/share/icons/Papirus/16x16/panel/brightness-high-symbolic.svg"
+fi

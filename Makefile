@@ -42,6 +42,8 @@ install: all
 	chmod 755 ${DESTDIR}${PREFIX}/bin/dwm_session.sh
 	cp -f scripts/dwm_volume ${DESTDIR}${PREFIX}/bin
 	chmod 755 ${DESTDIR}${PREFIX}/bin/dwm_volume
+	cp -f scripts/dwm_brightness ${DESTDIR}${PREFIX}/bin
+	chmod 755 ${DESTDIR}${PREFIX}/bin/dwm_brightness
 
 uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/dwm\
@@ -49,5 +51,6 @@ uninstall:
 	rm -f ${XSESSIONSDIR}/dwm.desktop
 	rm -f ${DESTDIR}${PREFIX}/bin/dwm_session.sh
 	rm -f ${DESTDIR}${PREFIX}/bin/dwm_volume
+	rm -f ${DESTDIR}${PREFIX}/bin/dwm_brightness
 
 .PHONY: all clean dist install uninstall
