@@ -6,6 +6,7 @@ My build of [dwm](https://dwm.suckless.org/) an extremely fast, small, and dynam
 * [fullgaps](https://dwm.suckless.org/patches/fullgaps/)
 * [movestack](https://dwm.suckless.org/patches/movestack/)
 * [restartsig](https://dwm.suckless.org/patches/restartsig/)
+* [systray](https://dwm.suckless.org/patches/systray/)
 
 
 ## Requirements
