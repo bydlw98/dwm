@@ -69,6 +69,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *browsercmd[] = { "firefox", NULL };
+static const char *dmenu_systemcmd[] = { "dmenu_system.sh", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *lockscreencmd[] = { "betterlockscreen", "-l", NULL };
 
 #include "movestack.c"
@@ -77,6 +78,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_b,      spawn,          {.v = browsercmd } },
+	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = dmenu_systemcmd } },
 	{ MODKEY|ShiftMask,             XK_x,      spawn,          {.v = lockscreencmd } },
 	{ 0,              XF86XK_AudioRaiseVolume, spawn,          SHCMD("dwm_volume up; kill -44 $(pidof dwmblocks)") },
 	{ 0,              XF86XK_AudioLowerVolume, spawn,          SHCMD("dwm_volume down; kill -44 $(pidof dwmblocks)") },
