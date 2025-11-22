@@ -43,6 +43,7 @@ static const Rule rules[] = {
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
+static int attachbelow = 1;    /* 1 means attach after the currently active window */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
 static const Layout layouts[] = {
@@ -85,6 +86,7 @@ static const Key keys[] = {
 	{ 0,             XF86XK_MonBrightnessDown, spawn,          SHCMD("dwm_brightness down") },
     { 0,                            XK_Print,  spawn,          SHCMD("flameshot full --clipboard") },
     { MODKEY,                       XK_Print,  spawn,          SHCMD("flameshot full --path ~/Pictures/screenshots") },
+	{ MODKEY,                       XK_Tab,    toggleAttachBelow, {0} },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
